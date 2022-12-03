@@ -110,7 +110,7 @@ Services can be run using the specific command or by launching the autorun bash 
 After setting the right permissions:
 
 ``
-chmod +x /run.sh
+chmod +x ./run.sh
 ``
 
 Run the command:
