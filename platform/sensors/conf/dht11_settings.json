@@ -1,17 +1,20 @@
-	{
-		"service_catalog": "http://192.168.1.130:8080/service_catalog",
-		"sensorID": "dht11",
-		"end_points": "MQTT",
-		"time_sleep":3,
-		"parameters": [{
-			"parameter": "temperature",
-			"value":null,
-			"unit": "C",
-			"timestamp":null
-		}, {
-			"parameter": "humidity",
-			"value":null,
-			"unit": "%",
-			"timestamp":null
-		}]
-	}
+{
+    "service_catalog": "http://192.168.1.191:8080/service_catalog",
+    "sensorID": "dht11",
+    "end_points": "MQTT",
+    "time_sleep": 3,
+    "parameters": [
+        {
+            "parameter": "temperature",
+            "value": null,
+            "unit": "C",
+            "timestamp": null
+        },
+        {
+            "parameter": "humidity",
+            "value": null,
+            "unit": "%",
+            "timestamp": null
+        }
+    ]
+}

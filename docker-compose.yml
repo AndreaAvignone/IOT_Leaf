@@ -1,0 +1,99 @@
+services:
+  service-catalog:
+    image: service_catalog
+    build: "./service catalog"
+    ports: 
+      - 8080:8080
+    volumes:
+      - service_data:/app
+
+  clients-catalog:
+    image: clients_catalog
+    build: "./clients catalog"
+    ports: 
+      - 9090:9090
+    volumes:
+      - clients_data:/app
+    depends_on:
+      - service-catalog
+
+  profiles-catalog:
+    image: profiles_catalog
+    build: "./profiles catalog"
+    ports: 
+      - 8081:8081
+    volumes:
+      - profiles_data:/app
+    depends_on:
+      - service-catalog
+
+  resources-catalog:
+    image: resources_catalog
+    build: "./resources catalog"
+    ports: 
+      - 8083:8083
+    volumes:
+      - resources_data:/app
+    depends_on:
+      - service-catalog
+
+  database-adaptor:
+    image: databasea_adaptor
+    build: "./database adaptor"
+    ports: 
+      - 8085:8085
+    volumes:
+      - db_adaptor_data:/app
+    depends_on:
+      - service-catalog
+
+  tips-catalog:
+    image: tips_catalog
+    build: "./tips catalog"
+    ports: 
+      - 8099:8099
+    volumes:
+      - tips_data:/app
+    depends_on:
+      - service-catalog
+
+  statistics:
+    image: statistics
+    build: "./statistics"
+    ports: 
+      - 9092:9092
+    volumes:
+      - statistics_data:/app
+    depends_on:
+      - service-catalog
+
+  grafana-catalog:
+    image: grafana-catalog
+    build: "./grafana"
+    ports: 
+      - 9999:9999
+    volumes:
+      - grafana_catalog_data:/app
+    depends_on:
+      - service-catalog
+
+  bot:
+    image: bot
+    build: "./bot"
+    ports: 
+      - 8087:8087
+    volumes:
+      - bot_data:/app
+    depends_on:
+      - service-catalog
+
+volumes:
+  service_data:
+  clients_data:
+  profiles_data:
+  resources_data:
+  db_adaptor_data:
+  tips_data:
+  statistics_data:
+  grafana_catalog_data:
+  bot_data:

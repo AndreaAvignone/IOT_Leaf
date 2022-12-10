@@ -1,8 +1,8 @@
 {
     "description": "Welcome to resources service",
-    "service_catalog": "http://192.168.1.130:8080/service_catalog",
-	 "service_name":"resource_catalog",  
-	 "delta":300,  
-    "IP_address": "192.168.1.130",
+    "service_catalog": "http://192.168.1.191:8080/service_catalog",
+    "service_name": "resource_catalog",
+    "delta": 300,
+    "IP_address": "0.0.0.0",
     "IP_port": 8083
 }

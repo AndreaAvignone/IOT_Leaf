@@ -1,4 +1,4 @@
 {
-    "service_catalog": "http://192.168.1.130:8080/service_catalog",
-    "clientID":"DISPLAY"
+    "service_catalog": "http://192.168.1.191:8080/service_catalog",
+    "clientID": "DISPLAY"
 }
