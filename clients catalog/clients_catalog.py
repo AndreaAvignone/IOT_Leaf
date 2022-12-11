@@ -1,9 +1,8 @@
 import cherrypy
-import json
-import os
 import sys
-import requests
 import time
+import os
+import json
 from etc.clients_class import *
 
 class Registration_deployer(object):
@@ -119,7 +118,6 @@ class Registration_deployer(object):
                     self.catalog.platforms.save()
                 except:
                     pass
-                print(data)
                 del data['password']
                 return json.dumps(data)
             except:

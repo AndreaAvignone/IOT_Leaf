@@ -1,7 +1,6 @@
 import cherrypy
-import json
-import requests
 import time
+import json
 import sys
 from etc.profiles_class import ProfilesCatalog
 

@@ -20,30 +20,6 @@
         "port": 3000,
         "service": ""
     },
-    "clients_catalog": {
-        "IP_address": "192.168.1.191",
-        "port": 9090,
-        "service": "/clients_catalog",
-        "url": "http://192.168.1.191:9090/clients_catalog"
-    },
-    "resource_catalog": {
-        "IP_address": "0.0.0.0",
-        "port": 8083,
-        "service": "/resource_catalog",
-        "url": "http://0.0.0.0:8083/resource_catalog"
-    },
-    "profiles_catalog": {
-        "IP_address": "0.0.0.0",
-        "port": 8081,
-        "service": "/profiles_catalog",
-        "url": "http://0.0.0.0:8081/profiles_catalog"
-    },
-    "tips_catalog": {
-        "IP_address": "0.0.0.0",
-        "port": 8099,
-        "service": "/tips_catalog",
-        "url": "http://0.0.0.0:8099/tips_catalog"
-    },
     "grafana_catalog": {
         "IP_address": "0.0.0.0",
         "port": 9999,
@@ -56,16 +32,40 @@
         "service": "/statistics_catalog",
         "url": "http://0.0.0.0:9092/statistics_catalog"
     },
-    "database_adaptor": {
+    "profiles_catalog": {
         "IP_address": "0.0.0.0",
-        "port": 8085,
-        "service": "/database_adaptor",
-        "url": "http://0.0.0.0:8085/database_adaptor"
+        "port": 8081,
+        "service": "/profiles_catalog",
+        "url": "http://0.0.0.0:8081/profiles_catalog"
+    },
+    "resource_catalog": {
+        "IP_address": "0.0.0.0",
+        "port": 8083,
+        "service": "/resource_catalog",
+        "url": "http://0.0.0.0:8083/resource_catalog"
+    },
+    "tips_catalog": {
+        "IP_address": "0.0.0.0",
+        "port": 8099,
+        "service": "/tips_catalog",
+        "url": "http://0.0.0.0:8099/tips_catalog"
     },
     "telegram_bot": {
-        "IP_address": "0.0.0.0",
+        "IP_address": "telegram-bot",
         "port": 8087,
         "service": "/telegram_bot",
-        "url": "http://0.0.0.0:8087/telegram_bot"
+        "url": "http://telegram-bot:8087/telegram_bot"
+    },
+    "clients_catalog": {
+        "IP_address": "clients-catalog",
+        "port": 9090,
+        "service": "/clients_catalog",
+        "url": "http://clients-catalog:9090/clients_catalog"
+    },
+    "database_adaptor": {
+        "IP_address": "database-adaptor",
+        "port": 8085,
+        "service": "/database_adaptor",
+        "url": "http://database-adaptor:8085/database_adaptor"
     }
 }

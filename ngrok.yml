@@ -1,13 +1,15 @@
 
 authtoken: xxxxxx
 region: eu
-web_addr: 192.168.1.130:4040
+web_addr: 192.168.1.191:4040
 tunnels:
   grafana:
-    addr: 192.168.1.130:3000
+    addr: 192.168.1.191:3000
+    schemes: 
+      - https
     proto: http
-    bind_tls: true
   clients_catalog:
-    addr: 192.168.1.89:9090
+    addr: 192.168.1.191:9090
+    schemes: 
+      - https
     proto: http
-    bind_tls: true

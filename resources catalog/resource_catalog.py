@@ -1,9 +1,8 @@
 import cherrypy
-import json
-import requests
 import time
 import datetime
 import sys
+import json
 import threading
 from etc.serverClass import *
 

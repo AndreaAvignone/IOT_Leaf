@@ -1,6 +1,4 @@
 import cherrypy
-import json
-import requests
 import sys
 from etc.tips_class import TipsHandler
 from etc.generic_service import *

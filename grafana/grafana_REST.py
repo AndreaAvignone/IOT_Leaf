@@ -1,9 +1,8 @@
 from collections import defaultdict
 import cherrypy
-import json
-import requests
 import time
 import sys
+import json
 from datetime import datetime
 from etc.grafana_class import *
 

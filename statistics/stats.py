@@ -1,5 +1,3 @@
-import requests
-import json
 import numpy as np
 import random
 import sys
@@ -149,7 +147,6 @@ if __name__ == "__main__":
     conf = sys.argv[1]
     conf_content=json.load(open(conf,"r"))
     stats = Stats(conf)
-    print(conf)
 
     if stats.service is not False:
         conf = {
@@ -159,8 +156,8 @@ if __name__ == "__main__":
             }
         }
         cherrypy.tree.mount(stats, stats.service, conf)
-        cherrypy.config.update({'server.socket_host': conf_content['IP_address']})
-        cherrypy.config.update({'server.socket_port': conf_content['IP_port']})
+        cherrypy.config.update({'server.socket_host': stats.serviceIP})
+        cherrypy.config.update({'server.socket_port': stats.servicePort})
         cherrypy.engine.start()
         cherrypy.engine.block()
 

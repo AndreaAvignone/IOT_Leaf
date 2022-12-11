@@ -1,7 +1,5 @@
 {
     "description": "Welcome to the profiles catalog",
     "service_catalog": "http://192.168.1.191:8080/service_catalog",
-    "service_name": "profiles_catalog",
-    "IP_address": "0.0.0.0",
-    "IP_port": 8081
+    "service_name": "profiles_catalog"
 }

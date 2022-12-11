@@ -2,6 +2,7 @@ services:
   service-catalog:
     image: service_catalog
     build: "./service catalog"
+    restart: always
     ports: 
       - 8080:8080
     volumes:
@@ -27,7 +28,7 @@ services:
     depends_on:
       - service-catalog
 
-  resources-catalog:
+  resource-catalog:
     image: resources_catalog
     build: "./resources catalog"
     ports: 
@@ -77,13 +78,23 @@ services:
     depends_on:
       - service-catalog
 
-  bot:
+  telegram-bot:
     image: bot
     build: "./bot"
     ports: 
       - 8087:8087
     volumes:
       - bot_data:/app
+    depends_on:
+      - service-catalog
+      - clients-catalog
+    restart: always
+
+  controls:
+    image: controls
+    build: "./controls"
+    volumes:
+      - controls_data:/app
     depends_on:
       - service-catalog
 
@@ -97,3 +108,4 @@ volumes:
   statistics_data:
   grafana_catalog_data:
   bot_data:
+  controls_data:

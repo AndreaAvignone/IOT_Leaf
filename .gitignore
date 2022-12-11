@@ -132,14 +132,3 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# .gitignore 
-temp_token.json
-clients_catalog.json
-adaptor.json
-default.json
-room_settings.json
-profiles_catalog.json
-conf.json
-service_catalog.json
-
-bot/conf/conf.json

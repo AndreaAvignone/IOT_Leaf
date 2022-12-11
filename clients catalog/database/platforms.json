@@ -83,9 +83,5 @@
                 ]
             }
         }
-    ],
-    "tokens": {
-        "telegram_token": "prova",
-        "weather_api_token": "prova"
-    }
+    ]
 }
