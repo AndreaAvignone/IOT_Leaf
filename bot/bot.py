@@ -406,9 +406,35 @@ class LeafBot(Generic_Service):
                 user["room_ID"]=None
 
             elif message=='/home':
-                self.bot.sendMessage(chat_ID, emoji.emojize(f':seedling:\tWelcome to Leaf!\t:seedling:\nYou are logged in as {user["user_ID"]}', language='alias'))
-                self.bot.sendMessage(chat_ID, 'Select an option:', reply_markup=self.home_keyboard)
-                user['flags']=dict.fromkeys(user['flags'], 0)
+                if user['user_ID'] is not None:
+                    self.bot.sendMessage(chat_ID, emoji.emojize(f':seedling:\tWelcome to Leaf!\t:seedling:\nYou are logged in as {user["user_ID"]}', language='alias'))
+                    self.bot.sendMessage(chat_ID, 'Select an option:', reply_markup=self.home_keyboard)
+                    user['flags']=dict.fromkeys(user['flags'], 0)
+                else:
+                    self.bot.sendMessage(chat_ID, f"Please, log in!\n Use: /login")
+
+            elif message=='/login':
+                if user['user_ID'] is not None:
+                    self.bot.sendMessage(chat_ID, f"You are already logged!")
+                else:
+                    self.bot.sendMessage(chat_ID, emoji.emojize(':seedling:\t Welcome to Leaf!\t:seedling:\nBefore starting Log into your Leaf account or create one', language='alias'), reply_markup=self.login_keyboard)
+                    platforms_list=requests.get(self.clientURL+'/platforms_list'+'?username='+user['user_ID']).json()
+                    user['flags']=dict.fromkeys(user['flags'], 0)
+                    for platform in platforms_list:
+                        log=requests.delete(self.clientURL+'/removeChatID/'+str(platform)+'/'+str(chat_ID))
+                    user["user_ID"]=None
+                    user["platform_ID"]=None
+                    user["room_ID"]=None
+            #user has written their userID
+            elif user['flags']['userID_flag']==1 and user['flags']['password_flag']==0:
+                self.bot.sendMessage(chat_ID, f'Now type your password for {message}:', reply_markup=self.back_login)
+                #create a provisional instance to store that userID with correspondent chatID
+                user_dict={"chat_ID":chat_ID,
+                "user_ID":message
+                }
+                self.authentications.append(user_dict)
+                user['flags']['password_flag']=1
+                print('Auth: ', self.authentications)
             
             elif message=='/logout':
                 self.bot.sendMessage(chat_ID, emoji.emojize(':seedling:\t Welcome to Leaf!\t:seedling:\nBefore starting Log into your Leaf account or create one', language='alias'), reply_markup=self.login_keyboard)
@@ -810,20 +836,23 @@ class LeafBot(Generic_Service):
 
         elif query_data=='stat':
             grafanaURL=requests.get(self.serviceURL+'/grafana_catalog').json()['url']
-            r=requests.get(grafanaURL+"/"+user['platform_ID']+"/"+user["room_ID"]+"/dashboardURL")
-            if r.status_code==200:
-                dashboard_url=r.text
-                period_keyboard=InlineKeyboardMarkup(inline_keyboard=[
-                [InlineKeyboardButton(text=emoji.emojize(':chart_with_upwards_trend:Dashboard', language='alias'), url=dashboard_url)],
-                [InlineKeyboardButton(text=emoji.emojize(':date:DAY statistics', language='alias'), callback_data='day')],
-                [InlineKeyboardButton(text=emoji.emojize(':calendar: WEEK statistics', language='alias'), callback_data='week')],
-                [InlineKeyboardButton(text=emoji.emojize(':spiral_calendar: MONTH statistics', language='alias'), callback_data='month')],
-                [InlineKeyboardButton(text=emoji.emojize(':back: BACK', language='alias'), callback_data='back')]
-                ])
-                self.bot.sendMessage(chat_ID, 'Choose your analysis:', reply_markup=period_keyboard)
-            else:
-                self.bot.sendMessage(chat_ID, f"{r.reason}")
+            try:
+                r=requests.get(grafanaURL+"/"+user['platform_ID']+"/"+user["room_ID"]+"/dashboardURL")
+                if r.status_code==200:
+                    dashboard_url=r.text
+                    period_keyboard=InlineKeyboardMarkup(inline_keyboard=[
+                    [InlineKeyboardButton(text=emoji.emojize(':chart_with_upwards_trend:Dashboard', language='alias'), url=dashboard_url)],
+                    [InlineKeyboardButton(text=emoji.emojize(':date:DAY statistics', language='alias'), callback_data='day')],
+                    [InlineKeyboardButton(text=emoji.emojize(':calendar: WEEK statistics', language='alias'), callback_data='week')],
+                    [InlineKeyboardButton(text=emoji.emojize(':spiral_calendar: MONTH statistics', language='alias'), callback_data='month')],
+                    [InlineKeyboardButton(text=emoji.emojize(':back: BACK', language='alias'), callback_data='back')]
+                    ])
+                    self.bot.sendMessage(chat_ID, 'Choose your analysis:', reply_markup=period_keyboard)
+                else:
+                    self.bot.sendMessage(chat_ID, f"{r.reason}")
             
+            except:
+                self.bot.sendMessage(chat_ID, f"Service not available.")
             
 
         elif query_data=='day' or query_data=='week' or query_data=='month':

@@ -52,7 +52,7 @@ class Registration_deployer(object):
             username=params['username']
             try:
                 data=self.catalog.users.find_user(username).copy()
-                print(data)
+                #print(data)
                 #del data['password']
                 return json.dumps(data['platforms_list'])
             except:
@@ -196,12 +196,9 @@ class Registration_deployer(object):
                 if outputFlag:
                     platform=self.catalog.platforms.find_platform(platform_ID)
                     org_key=platform['specs']['grafana']["org_key"]
-                    print(org_key)
                     grafana_catalog=self.catalog.retrieveService('grafana_catalog')
-                    print(grafana_catalog)
                     log=requests.delete(grafana_catalog['url']+"/"+platform_ID+"/"+room_ID+"/deleteDashboard/"+org_key)
                     output="Platform '{}' - room '{}' removed".format(platform_ID,room_ID)
-                    print(output)
                     self.catalog.platforms.save()
             else:
                 raise cherrypy.HTTPError("404 Resource not found")
